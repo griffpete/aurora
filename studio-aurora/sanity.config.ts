@@ -10,7 +10,24 @@ export default defineConfig({
   projectId: 'vyi2ka9l',
   dataset: 'production',
 
-  plugins: [structureTool(), visionTool()],
+  plugins: [
+    structureTool({
+      structure: (S) =>
+        S.list()
+          .title('Content')
+          .items([
+            // Singleton metadata document
+            S.listItem()
+              .title('Metadata')
+              .id('metadata')
+              .child(S.document().schemaType('metadata').documentId('metadata')),
+            // All other document types
+            S.divider(),
+            ...S.documentTypeListItems().filter((item) => item.getId() !== 'metadata'),
+          ]),
+    }),
+    visionTool(),
+  ],
 
   schema: {
     types: schemaTypes,
