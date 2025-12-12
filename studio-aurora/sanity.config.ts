@@ -16,14 +16,22 @@ export default defineConfig({
         S.list()
           .title('Content')
           .items([
-            // Singleton metadata document
+            // Singleton - Home Page
+            S.listItem()
+              .title('Home Page')
+              .id('homePage')
+              .child(S.document().schemaType('homePage').documentId('homePage')),
+            // Singleton - Metadata
             S.listItem()
               .title('Metadata')
               .id('metadata')
               .child(S.document().schemaType('metadata').documentId('metadata')),
-            // All other document types
             S.divider(),
-            ...S.documentTypeListItems().filter((item) => item.getId() !== 'metadata'),
+            // All other document types
+            ...S.documentTypeListItems().filter((item) => {
+              const id = item.getId()
+              return id && !['metadata', 'homePage'].includes(id)
+            }),
           ]),
     }),
     visionTool(),

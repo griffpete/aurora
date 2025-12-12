@@ -1,4 +1,6 @@
-import {postType} from './postType'
 import {metadataType} from './metadata'
+import {pageType} from './page'
+import {imageBlock} from './imageBlock'
+import {homePageType} from './homePage'
 
-export const schemaTypes = [postType, metadataType]
+export const schemaTypes = [metadataType, homePageType, pageType, imageBlock]

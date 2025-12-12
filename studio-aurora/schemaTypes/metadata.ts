@@ -9,13 +9,11 @@ export const metadataType = defineType({
       name: 'siteTitle',
       title: 'Site Title',
       type: 'string',
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'description',
       title: 'Description',
       type: 'string',
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'favicon',
