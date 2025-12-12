@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { client } from "@/sanity/client";
-import imageUrlBuilder from "@sanity/image-url";
-import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import imageUrlBuilder, { type SanityImageSource } from "@sanity/image-url";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
