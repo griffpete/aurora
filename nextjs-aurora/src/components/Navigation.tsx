@@ -4,7 +4,11 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { LightBulb } from "./LightBulb";
 import { Phone } from "lucide-react";
 
-export function Navigation() {
+interface navigationProps {
+  companyTitle: string;
+}
+
+export function Navigation({companyTitle}: navigationProps) {
   const { scrollY } = useScroll();
   const backgroundColor = useTransform(
     scrollY,
@@ -33,7 +37,7 @@ export function Navigation() {
             animate={{ opacity: 1, x: 0 }}
             className="flex items-center space-x-2"
           >
-            <h3 className="text-white">Trimlight</h3>
+            <h3 className="text-white">{companyTitle}</h3>
           </motion.div>
 
           <motion.div
