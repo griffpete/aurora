@@ -20,7 +20,7 @@ interface ContactProps {
   title?: string;
   description?: string;
   cards?: Array<{
-    Title: string;
+    title: string;
     description: string;
     lucideIconName: string;
   }>;
@@ -110,7 +110,7 @@ export function Contact({
                   <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
                     <Icon className="w-6 h-6 text-white" />
                   </div>
-                  <div className="text-white/60 mb-1">{contact.Title}</div>
+                  <div className="text-white/60 mb-1">{contact.title}</div>
                   <div className="text-white">{contact.description}</div>
                 </motion.div>
               );

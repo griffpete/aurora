@@ -19,7 +19,7 @@ interface FeaturesProps {
   title?: string;
   description?: string;
   cards?: Array<{
-    Title: string;
+    title: string;
     description: string;
     lucideIconName: string;
   }>;
