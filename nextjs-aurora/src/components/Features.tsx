@@ -1,36 +1,37 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Smartphone, Zap, Calendar, Shield } from "lucide-react";
+import * as Icons from "lucide-react";
+import { LucideIcon } from "lucide-react";
 
-const features = [
-  {
-    icon: Smartphone,
-    title: "App Controlled",
-    description:
-      "Control your lights from anywhere with our intuitive mobile app. Change colors, patterns, and schedules with a tap.",
-  },
-  {
-    icon: Zap,
-    title: "Energy Efficient",
-    description:
-      "Premium LED technology uses 90% less energy than traditional bulbs while lasting 50,000+ hours.",
-  },
-  {
-    icon: Calendar,
-    title: "Year-Round Beauty",
-    description:
-      "Perfect for holidays, special occasions, or everyday elegance. Adapt your lighting to any season or event.",
-  },
-  {
-    icon: Shield,
-    title: "Lifetime Warranty",
-    description:
-      "We stand behind our product with a comprehensive lifetime warranty. Your investment is protected forever.",
-  },
-];
+// Icon mapping helper
+const iconMap: Record<string, LucideIcon> = Icons as any;
 
-export function Features() {
+// Convert kebab-case to PascalCase
+const toPascalCase = (str: string) => {
+  return str
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join("");
+};
+
+interface FeaturesProps {
+  title?: string;
+  description?: string;
+  cards?: Array<{
+    Title: string;
+    description: string;
+    lucideIconName: string;
+  }>;
+}
+
+export function Features({
+  title = "Why Choose Trimlight?",
+  description = "Experience the perfect blend of innovation, quality, and convenience",
+  cards,
+}: FeaturesProps) {
+  if (!cards || cards.length === 0) return null;
+
   return (
     <section id="features" className="py-24 bg-black relative overflow-hidden">
       {/* Background gradient */}
@@ -43,17 +44,22 @@ export function Features() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-white mb-4">
-            Why Choose Trimlight?
-          </h2>
+          <h2 className="text-white mb-4">{title}</h2>
           <p className="text-xl text-white/60 max-w-2xl mx-auto">
-            Experience the perfect blend of innovation, quality, and convenience
+            {description}
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {features.map((feature, index) => {
-            const Icon = feature.icon;
+        <div
+          className="grid gap-8"
+          style={{
+            gridTemplateColumns: `repeat(auto-fit, minmax(250px, 1fr))`,
+          }}
+        >
+          {cards.map((feature, index) => {
+            const Icon =
+              iconMap[toPascalCase(feature.lucideIconName)] ||
+              iconMap.HelpCircle;
             return (
               <motion.div
                 key={index}

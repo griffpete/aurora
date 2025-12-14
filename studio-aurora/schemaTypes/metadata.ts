@@ -4,6 +4,13 @@ export const metadataType = defineType({
   name: 'metadata',
   title: 'Metadata',
   type: 'document',
+  preview: {
+    prepare() {
+      return {
+        title: 'Metadata',
+      }
+    },
+  },
   fields: [
     defineField({
       name: 'siteTitle',

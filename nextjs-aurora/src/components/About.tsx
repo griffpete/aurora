@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { CheckCircle } from "lucide-react";
 
-const benefits = [
+const defaultBenefits = [
   "Professional installation by certified technicians",
   "Customizable to your exact home dimensions",
   "Weather-resistant and built to last decades",
@@ -12,7 +12,23 @@ const benefits = [
   "Local support and service",
 ];
 
-export function About() {
+interface AboutProps {
+  title?: string;
+  description?: string;
+  colorOptions?: string;
+  benefits?: string[];
+  buttonText?: string;
+  slug?: string;
+}
+
+export function About({
+  title = "The Future of Home Lighting",
+  description = "Trimlight's patented permanent lighting system is professionally installed along your roofline, offering unmatched versatility and control. Say goodbye to the hassle of seasonal decorating and hello to effortless elegance year-round.",
+  colorOptions = "16M+",
+  benefits = defaultBenefits,
+  buttonText = "Learn More About Trimlight",
+  slug = "about",
+}: AboutProps) {
   return (
     <section id="about" className="py-24 bg-black">
       <div className="max-w-7xl mx-auto px-6">
@@ -22,15 +38,8 @@ export function About() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-white mb-6">
-              The Future of Home Lighting
-            </h2>
-            <p className="text-lg text-white/70 mb-8">
-              Trimlight's patented permanent lighting system is professionally
-              installed along your roofline, offering unmatched versatility and
-              control. Say goodbye to the hassle of seasonal decorating and hello
-              to effortless elegance year-round.
-            </p>
+            <h2 className="text-white mb-6">{title}</h2>
+            <p className="text-lg text-white/70 mb-8">{description}</p>
 
             <div className="space-y-4 mb-8">
               {benefits.map((benefit, index) => (
@@ -53,7 +62,7 @@ export function About() {
               whileTap={{ scale: 0.95 }}
               className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-full shadow-lg"
             >
-              Learn More About Trimlight
+              {buttonText}
             </motion.button>
           </motion.div>
 
@@ -76,7 +85,9 @@ export function About() {
               />
               <div className="absolute inset-4 bg-black rounded-full flex items-center justify-center">
                 <div className="text-center">
-                  <div className="text-5xl font-bold text-white mb-2">16M+</div>
+                  <div className="text-5xl font-bold text-white mb-2">
+                    {colorOptions}
+                  </div>
                   <div className="text-white/60">Color Options</div>
                 </div>
               </div>

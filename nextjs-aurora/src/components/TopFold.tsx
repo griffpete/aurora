@@ -5,25 +5,29 @@ import { motion } from "framer-motion";
 import { ChevronRight, Sparkles } from "lucide-react";
 
 interface TopFoldProps {
-  title: string;
-  coloredTitle: string;
-  subTitle: string;
-  description: string;
-  ctaText: string;
-  secondCtaText: string;
-  heroImageUrl: string;
-  stats: Array<{ title: string; description: string }>;
+  title?: string;
+  coloredTitle?: string;
+  subTitle?: string;
+  description?: string;
+  ctaText?: string;
+  secondCtaText?: string;
+  heroImageUrl?: string;
+  stats?: Array<{ title: string; description: string }>;
 }
 
 export function TopFold({
-  title,
-  coloredTitle,
-  subTitle,
-  description,
-  ctaText,
-  secondCtaText,
-  heroImageUrl,
-  stats,
+  title = "Transform Your Home",
+  coloredTitle = "With Custom LED Lighting",
+  subTitle = "Permanent LED Lighting Solutions",
+  description = "Year-round elegance meets cutting-edge technology. Control millions of colors from your phone. No more ladders, no more hassle.",
+  ctaText = "Get Free Quote",
+  secondCtaText = "View Gallery",
+  heroImageUrl = "https://images.unsplash.com/photo-1669219905807-aa5aa1bb3447?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxob3VzZSUyMHBlcm1hbmVudCUyMGxpZ2h0cyUyMG5pZ2h0fGVufDF8fHx8MTc2NTUxNDIzMnww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+  stats = [
+    { title: "50K+", description: "Homes Illuminated" },
+    { title: "16M+", description: "Color Options" },
+    { title: "Lifetime", description: "Warranty" },
+  ],
 }: TopFoldProps) {
   const particles = useMemo(
     () =>
@@ -132,21 +136,26 @@ export function TopFold({
         </motion.div>
 
         {/* Stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1 }}
-          className="mt-20 grid grid-cols-3 gap-8 max-w-3xl mx-auto"
-        >
-          {stats.map((stat, i) => (
-            <div key={i} className="text-center">
-              <div className="text-3xl font-bold text-white mb-2">
-                {stat.title}
+        {stats && stats.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1 }}
+            className="mt-20 grid gap-8 max-w-3xl mx-auto"
+            style={{
+              gridTemplateColumns: `repeat(${stats.length}, minmax(0, 1fr))`,
+            }}
+          >
+            {stats.map((stat, i) => (
+              <div key={i} className="text-center">
+                <div className="text-3xl font-bold text-white mb-2">
+                  {stat.title}
+                </div>
+                <div className="text-white/60">{stat.description}</div>
               </div>
-              <div className="text-white/60">{stat.description}</div>
-            </div>
-          ))}
-        </motion.div>
+            ))}
+          </motion.div>
+        )}
       </div>
 
       {/* Scroll indicator */}

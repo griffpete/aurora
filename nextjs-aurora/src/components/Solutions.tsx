@@ -14,7 +14,12 @@ import {
   ChevronRight,
 } from "lucide-react";
 
-const solutions = [
+interface SolutionsProps {
+  title?: string;
+  description?: string;
+}
+
+const defaultSolutions = [
   {
     icon: Sparkles,
     title: "Holiday",
@@ -25,7 +30,8 @@ const solutions = [
   {
     icon: Shield,
     title: "Security",
-    description: "Illuminate your property for enhanced safety and peace of mind",
+    description:
+      "Illuminate your property for enhanced safety and peace of mind",
     color: "from-blue-500 to-cyan-500",
     bgColor: "bg-blue-500/10",
   },
@@ -80,7 +86,12 @@ const solutions = [
   },
 ];
 
-export function Solutions() {
+export function Solutions({
+  title = "Trimlight Solutions",
+  description = "From festive holidays to everyday elegance, discover the perfect lighting solution for every occasion and space",
+}: SolutionsProps) {
+  const solutions = defaultSolutions;
+
   return (
     <section className="py-24 bg-gradient-to-b from-black to-gray-900 relative overflow-hidden">
       {/* Decorative elements */}
@@ -96,10 +107,9 @@ export function Solutions() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-white mb-4">Trimlight Solutions</h2>
+          <h2 className="text-white mb-4">{title}</h2>
           <p className="text-xl text-white/60 max-w-3xl mx-auto">
-            From festive holidays to everyday elegance, discover the perfect
-            lighting solution for every occasion and space
+            {description}
           </p>
         </motion.div>
 
@@ -129,10 +139,13 @@ export function Solutions() {
                     transition={{ duration: 0.5 }}
                     className={`w-16 h-16 ${solution.bgColor} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}
                   >
-                    <Icon className={`w-8 h-8 bg-gradient-to-br ${solution.color} text-transparent`} style={{ 
-                      filter: 'drop-shadow(0 0 8px currentColor)',
-                      color: 'white'
-                    }} />
+                    <Icon
+                      className={`w-8 h-8 bg-gradient-to-br ${solution.color} text-transparent`}
+                      style={{
+                        filter: "drop-shadow(0 0 8px currentColor)",
+                        color: "white",
+                      }}
+                    />
                   </motion.div>
 
                   <h3 className="text-white mb-3 flex items-center justify-between">
@@ -152,7 +165,7 @@ export function Solutions() {
                     background: `linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent)`,
                   }}
                   animate={{
-                    x: ['-100%', '100%'],
+                    x: ["-100%", "100%"],
                   }}
                   transition={{
                     duration: 1.5,

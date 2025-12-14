@@ -16,21 +16,26 @@ export default defineConfig({
         S.list()
           .title('Content')
           .items([
-            // Singleton - Home Page
             S.listItem()
               .title('Home Page')
               .id('homePage')
               .child(S.document().schemaType('homePage').documentId('homePage')),
-            // Singleton - Metadata
             S.listItem()
               .title('Metadata')
               .id('metadata')
               .child(S.document().schemaType('metadata').documentId('metadata')),
+            S.listItem()
+              .title('Nav')
+              .id('nav')
+              .child(S.document().schemaType('nav').documentId('nav')),
+            S.listItem()
+              .title('Footer')
+              .id('footer')
+              .child(S.document().schemaType('footer').documentId('footer')),
             S.divider(),
-            // All other document types
             ...S.documentTypeListItems().filter((item) => {
               const id = item.getId()
-              return id && !['metadata', 'homePage'].includes(id)
+              return id && !['metadata', 'homePage', 'nav', 'footer'].includes(id)
             }),
           ]),
     }),

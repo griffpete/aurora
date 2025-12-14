@@ -41,7 +41,7 @@ export const pageType = defineType({
     defineField({
       name: 'gallery',
       type: 'array',
-      of: [{type: 'imageBlock'}],
+      of: [{type: 'card'}],
     }),
   ],
 })

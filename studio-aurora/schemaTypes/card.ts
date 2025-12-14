@@ -1,23 +1,27 @@
 import {defineField, defineType} from 'sanity'
 
-export const imageBlockType = defineType({
-  name: 'imageBlock',
-  title: 'Image Block',
+export const cardType = defineType({
+  name: 'card',
+  title: 'Card',
   type: 'object',
   fields: [
     defineField({
-      name: 'Title',
+      name: 'title',
+      title: 'Title',
       type: 'string',
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'description',
+      title: 'Description',
       type: 'text',
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'image',
-      type: 'image',
+      name: 'lucideIconName',
+      title: 'Lucide Icon Name',
+      description: 'Find icon names at - https://lucide.dev/icons/',
+      type: 'string',
       validation: (rule) => rule.required(),
     }),
   ],

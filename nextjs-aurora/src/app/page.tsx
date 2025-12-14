@@ -10,6 +10,7 @@ import { client } from "@/sanity/client";
 import { imageUrl } from "@/sanity/image";
 
 interface HomePageData {
+  // Top Fold
   title: string;
   coloredTitle: string;
   subTitle: string;
@@ -21,8 +22,45 @@ interface HomePageData {
   };
   CTAText: string;
   secondCTAText: string;
-  companyTitle: string;
   stats: Array<{ title: string; description: string }>;
+
+  // Features
+  featureTitle: string;
+  featureDescription: string;
+  featureCard: Array<{
+    title: string;
+    description: string;
+    lucideIconName: string;
+  }>;
+
+  // Solutions
+  solutionTitle: string;
+  solutionDescription: string;
+
+  // Demo
+  demoTitle: string;
+  demoDescription: string;
+
+  // Learn More
+  learnMoreTitle: string;
+  learnMoreDescription: string;
+  learnMoreColorOptions: string;
+  learnMoreBenefitList: string[];
+  learnMoreButtonText: string;
+  learnMoreSlug: {
+    current: string;
+  };
+
+  // Contact
+  contactTitle: string;
+  contactDescription: string;
+  contactCard: Array<{
+    title: string;
+    description: string;
+    lucideIconName: string;
+  }>;
+  contactCTAText: string;
+  contactPullBack: string;
 }
 
 async function getHomePageData(): Promise<HomePageData | null> {
@@ -36,8 +74,25 @@ async function getHomePageData(): Promise<HomePageData | null> {
         heroImage,
         CTAText,
         secondCTAText,
-        companyTitle,
-        stats
+        stats,
+        featureTitle,
+        featureDescription,
+        featureCard,
+        solutionTitle,
+        solutionDescription,
+        demoTitle,
+        demoDescription,
+        learnMoreTitle,
+        learnMoreDescription,
+        learnMoreColorOptions,
+        learnMoreBenefitList,
+        learnMoreButtonText,
+        learnMoreSlug,
+        contactTitle,
+        contactDescription,
+        contactCard,
+        contactCTAText,
+        contactPullBack
       }`,
     );
     return data;
@@ -49,38 +104,49 @@ async function getHomePageData(): Promise<HomePageData | null> {
 
 export default async function Home() {
   const data = await getHomePageData();
-  const title = data?.title || "Transform Your Home";
-  const coloredTitle = data?.coloredTitle || "With Custom LED Lighting";
-  const subTitle = data?.subTitle || "Permanent LED Lighting Solutions";
-  const description =
-    data?.description ||
-    "Year-round elegance meets cutting-edge technology. Control millions of colors from your phone. No more ladders, no more hassle.";
-  const ctaText = data?.CTAText || "Get Free Quote";
-  const secondCtaText = data?.secondCTAText || "View Gallery";
-  const companyTitle = data?.companyTitle || "View Gallery";
+
   const heroImageUrl = data?.heroImage
     ? imageUrl(data.heroImage).width(1920).height(1080).url()
-    : "https://images.unsplash.com/photo-1669219905807-aa5aa1bb3447?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxob3VzZSUyMHBlcm1hbmVudCUyMGxpZ2h0cyUyMG5pZ2h0fGVufDF8fHx8MTc2NTUxNDIzMnww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral";
-  const stats = data?.stats || [];
+    : undefined;
 
   return (
     <div className="bg-black">
-      <Navigation companyTitle={companyTitle} />
+      <Navigation companyTitle="Trimlight" />
       <TopFold
-        title={title}
-        coloredTitle={coloredTitle}
-        subTitle={subTitle}
-        description={description}
-        ctaText={ctaText}
-        secondCtaText={secondCtaText}
+        title={data?.title}
+        coloredTitle={data?.coloredTitle}
+        subTitle={data?.subTitle}
+        description={data?.description}
+        ctaText={data?.CTAText}
+        secondCtaText={data?.secondCTAText}
         heroImageUrl={heroImageUrl}
-        stats={stats}
+        stats={data?.stats}
       />
-      <Features />
-      <Solutions />
-      <Gallery />
-      <About />
-      <CTA />
+      <Features
+        title={data?.featureTitle}
+        description={data?.featureDescription}
+        cards={data?.featureCard}
+      />
+      <Solutions
+        title={data?.solutionTitle}
+        description={data?.solutionDescription}
+      />
+      <Gallery title={data?.demoTitle} description={data?.demoDescription} />
+      <About
+        title={data?.learnMoreTitle}
+        description={data?.learnMoreDescription}
+        colorOptions={data?.learnMoreColorOptions}
+        benefits={data?.learnMoreBenefitList}
+        buttonText={data?.learnMoreButtonText}
+        slug={data?.learnMoreSlug?.current}
+      />
+      <CTA
+        title={data?.contactTitle}
+        description={data?.contactDescription}
+        cards={data?.contactCard}
+        ctaText={data?.contactCTAText}
+        pullBack={data?.contactPullBack}
+      />
 
       {/* Footer */}
       <footer className="bg-black border-t border-white/10 py-8">

@@ -1,29 +1,71 @@
 "use client";
 
+import { useMemo } from "react";
 import { motion } from "framer-motion";
-import { Phone, Mail, MapPin } from "lucide-react";
+import * as Icons from "lucide-react";
+import { LucideIcon } from "lucide-react";
 
-export function CTA() {
+// Icon mapping helper
+const iconMap: Record<string, LucideIcon> = Icons as any;
+
+// Convert kebab-case to PascalCase
+const toPascalCase = (str: string) => {
+  return str
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join("");
+};
+
+interface CTAProps {
+  title?: string;
+  description?: string;
+  cards?: Array<{
+    title: string;
+    description: string;
+    lucideIconName: string;
+  }>;
+  ctaText?: string;
+  pullBack?: string;
+}
+
+export function CTA({
+  title = "Ready to Transform Your Home?",
+  description = "Get a free consultation and quote. Our experts will help you design the perfect lighting solution for your home.",
+  cards,
+  ctaText = "Schedule Free Consultation",
+  pullBack = "No obligation • Free quote • Professional installation",
+}: CTAProps) {
+  const particles = useMemo(
+    () =>
+      Array.from({ length: 50 }).map(() => ({
+        left: Math.random() * 100,
+        top: Math.random() * 100,
+        duration: 3 + Math.random() * 2,
+        delay: Math.random() * 3,
+      })),
+    [],
+  );
+
   return (
     <section className="py-24 bg-gradient-to-b from-gray-900 to-black relative overflow-hidden">
       {/* Animated background */}
       <div className="absolute inset-0">
-        {Array.from({ length: 50 }).map((_, i) => (
+        {particles.map((particle, i) => (
           <motion.div
             key={i}
             className="absolute w-px h-px bg-purple-500 rounded-full"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
+              left: `${particle.left}%`,
+              top: `${particle.top}%`,
             }}
             animate={{
               opacity: [0, 1, 0],
               scale: [0, 2, 0],
             }}
             transition={{
-              duration: 3 + Math.random() * 2,
+              duration: particle.duration,
               repeat: Infinity,
-              delay: Math.random() * 3,
+              delay: particle.delay,
             }}
           />
         ))}
@@ -36,58 +78,44 @@ export function CTA() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-white mb-6">
-            Ready to Transform Your Home?
-          </h2>
+          <h2 className="text-white mb-6">{title}</h2>
           <p className="text-xl text-white/60 max-w-2xl mx-auto">
-            Get a free consultation and quote. Our experts will help you design
-            the perfect lighting solution for your home.
+            {description}
           </p>
         </motion.div>
 
         {/* Contact cards */}
-        <div className="grid md:grid-cols-3 gap-6 mb-12">
-          {[
-            {
-              icon: Phone,
-              title: "Call Us",
-              content: "(555) 123-4567",
-              action: "tel:5551234567",
-            },
-            {
-              icon: Mail,
-              title: "Email Us",
-              content: "info@trimlight.local",
-              action: "mailto:info@trimlight.local",
-            },
-            {
-              icon: MapPin,
-              title: "Visit Us",
-              content: "Your City, ST",
-              action: "#",
-            },
-          ].map((contact, index) => {
-            const Icon = contact.icon;
-            return (
-              <motion.a
-                key={index}
-                href={contact.action}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -5 }}
-                className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 text-center hover:bg-white/10 hover:border-purple-500/50 transition-all"
-              >
-                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Icon className="w-6 h-6 text-white" />
-                </div>
-                <div className="text-white/60 mb-1">{contact.title}</div>
-                <div className="text-white">{contact.content}</div>
-              </motion.a>
-            );
-          })}
-        </div>
+        {cards && cards.length > 0 && (
+          <div
+            className="grid gap-6 mb-12"
+            style={{
+              gridTemplateColumns: `repeat(auto-fit, minmax(200px, 1fr))`,
+            }}
+          >
+            {cards.map((contact, index) => {
+              const Icon =
+                iconMap[toPascalCase(contact.lucideIconName)] ||
+                iconMap.HelpCircle;
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{ y: -5 }}
+                  className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 text-center hover:bg-white/10 hover:border-purple-500/50 transition-all"
+                >
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Icon className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="text-white/60 mb-1">{contact.Title}</div>
+                  <div className="text-white">{contact.description}</div>
+                </motion.div>
+              );
+            })}
+          </div>
+        )}
 
         {/* Main CTA button */}
         <motion.div
@@ -101,13 +129,11 @@ export function CTA() {
             whileTap={{ scale: 0.95 }}
             className="bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 text-white px-12 py-5 rounded-full shadow-2xl inline-flex items-center space-x-3"
           >
-            <Phone className="w-5 h-5" />
-            <span className="text-lg">Schedule Free Consultation</span>
+            <Icons.Phone className="w-5 h-5" />
+            <span className="text-lg">{ctaText}</span>
           </motion.button>
 
-          <p className="text-white/40 mt-6">
-            No obligation • Free quote • Professional installation
-          </p>
+          <p className="text-white/40 mt-6">{pullBack}</p>
         </motion.div>
       </div>
     </section>
