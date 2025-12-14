@@ -53,7 +53,7 @@ export function TopFold({
       </div>
 
       {/* Animated particles */}
-      <div className="absolute inset-0 z-10">
+      <div className="absolute inset-0 z-10" suppressHydrationWarning>
         {particles.map((particle, i) => (
           <motion.div
             key={i}
@@ -62,6 +62,7 @@ export function TopFold({
               left: `${particle.left}%`,
               top: `${particle.top}%`,
             }}
+            suppressHydrationWarning
             animate={{
               opacity: [0, 1, 0],
               scale: [0, 1, 0],

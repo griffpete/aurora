@@ -3,15 +3,6 @@
 import { motion } from "framer-motion";
 import { CheckCircle } from "lucide-react";
 
-const defaultBenefits = [
-  "Professional installation by certified technicians",
-  "Customizable to your exact home dimensions",
-  "Weather-resistant and built to last decades",
-  "Smart home integration compatible",
-  "Programmable schedules and animations",
-  "Local support and service",
-];
-
 interface AboutProps {
   title?: string;
   description?: string;
@@ -25,7 +16,7 @@ export function About({
   title = "The Future of Home Lighting",
   description = "Trimlight's patented permanent lighting system is professionally installed along your roofline, offering unmatched versatility and control. Say goodbye to the hassle of seasonal decorating and hello to effortless elegance year-round.",
   colorOptions = "16M+",
-  benefits = defaultBenefits,
+  benefits,
   buttonText = "Learn More About Trimlight",
   slug = "about",
 }: AboutProps) {
@@ -41,21 +32,23 @@ export function About({
             <h2 className="text-white mb-6">{title}</h2>
             <p className="text-lg text-white/70 mb-8">{description}</p>
 
-            <div className="space-y-4 mb-8">
-              {benefits.map((benefit, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="flex items-start space-x-3"
-                >
-                  <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-white/80">{benefit}</span>
-                </motion.div>
-              ))}
-            </div>
+            {benefits && benefits.length > 0 && (
+              <div className="space-y-4 mb-8">
+                {benefits.map((benefit, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    className="flex items-start space-x-3"
+                  >
+                    <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-white/80">{benefit}</span>
+                  </motion.div>
+                ))}
+              </div>
+            )}
 
             <motion.button
               whileHover={{ scale: 1.05 }}

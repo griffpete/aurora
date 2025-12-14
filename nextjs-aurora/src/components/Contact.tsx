@@ -16,11 +16,11 @@ const toPascalCase = (str: string) => {
     .join("");
 };
 
-interface CTAProps {
+interface ContactProps {
   title?: string;
   description?: string;
   cards?: Array<{
-    title: string;
+    Title: string;
     description: string;
     lucideIconName: string;
   }>;
@@ -28,13 +28,13 @@ interface CTAProps {
   pullBack?: string;
 }
 
-export function CTA({
+export function Contact({
   title = "Ready to Transform Your Home?",
   description = "Get a free consultation and quote. Our experts will help you design the perfect lighting solution for your home.",
   cards,
   ctaText = "Schedule Free Consultation",
   pullBack = "No obligation • Free quote • Professional installation",
-}: CTAProps) {
+}: ContactProps) {
   const particles = useMemo(
     () =>
       Array.from({ length: 50 }).map(() => ({
@@ -49,7 +49,7 @@ export function CTA({
   return (
     <section className="py-24 bg-gradient-to-b from-gray-900 to-black relative overflow-hidden">
       {/* Animated background */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0" suppressHydrationWarning>
         {particles.map((particle, i) => (
           <motion.div
             key={i}
@@ -58,6 +58,7 @@ export function CTA({
               left: `${particle.left}%`,
               top: `${particle.top}%`,
             }}
+            suppressHydrationWarning
             animate={{
               opacity: [0, 1, 0],
               scale: [0, 2, 0],

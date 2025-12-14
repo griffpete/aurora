@@ -2,9 +2,9 @@ import { Navigation } from "@/components/Navigation";
 import { TopFold } from "@/components/TopFold";
 import { Features } from "@/components/Features";
 import { Solutions } from "@/components/Solutions";
-import { Gallery } from "@/components/Gallery";
+import { Demo } from "@/components/Demo";
 import { About } from "@/components/About";
-import { CTA } from "@/components/CTA";
+import { Contact } from "@/components/Contact";
 
 import { client } from "@/sanity/client";
 import { imageUrl } from "@/sanity/image";
@@ -42,12 +42,12 @@ interface HomePageData {
   demoDescription: string;
 
   // Learn More
-  learnMoreTitle: string;
-  learnMoreDescription: string;
-  learnMoreColorOptions: string;
-  learnMoreBenefitList: string[];
-  learnMoreButtonText: string;
-  learnMoreSlug: {
+  aboutTitle: string;
+  aboutDescription: string;
+  aboutColorOptions: string;
+  aboutBenefitList: string[];
+  aboutButtonText: string;
+  aboutSlug: {
     current: string;
   };
 
@@ -82,12 +82,12 @@ async function getHomePageData(): Promise<HomePageData | null> {
         solutionDescription,
         demoTitle,
         demoDescription,
-        learnMoreTitle,
-        learnMoreDescription,
-        learnMoreColorOptions,
-        learnMoreBenefitList,
-        learnMoreButtonText,
-        learnMoreSlug,
+        aboutTitle,
+        aboutDescription,
+        aboutColorOptions,
+        aboutBenefitList,
+        aboutButtonText,
+        aboutSlug,
         contactTitle,
         contactDescription,
         contactCard,
@@ -131,16 +131,16 @@ export default async function Home() {
         title={data?.solutionTitle}
         description={data?.solutionDescription}
       />
-      <Gallery title={data?.demoTitle} description={data?.demoDescription} />
+      <Demo title={data?.demoTitle} description={data?.demoDescription} />
       <About
-        title={data?.learnMoreTitle}
-        description={data?.learnMoreDescription}
-        colorOptions={data?.learnMoreColorOptions}
-        benefits={data?.learnMoreBenefitList}
-        buttonText={data?.learnMoreButtonText}
-        slug={data?.learnMoreSlug?.current}
+        title={data?.aboutTitle}
+        description={data?.aboutDescription}
+        colorOptions={data?.aboutColorOptions}
+        benefits={data?.aboutBenefitList}
+        buttonText={data?.aboutButtonText}
+        slug={data?.aboutSlug?.current}
       />
-      <CTA
+      <Contact
         title={data?.contactTitle}
         description={data?.contactDescription}
         cards={data?.contactCard}

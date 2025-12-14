@@ -36,11 +36,22 @@ const colorThemes = [
   },
 ];
 
-export function Gallery() {
+interface DemoProps {
+  title?: string;
+  description?: string;
+}
+
+export function Demo({
+  title = "Endless Color Possibilities",
+  description = "Create the perfect ambiance for any occasion with 16 million color combinations",
+}: DemoProps) {
   const [selectedTheme, setSelectedTheme] = useState(0);
 
   return (
-    <section id="gallery" className="py-24 bg-gradient-to-b from-black to-gray-900">
+    <section
+      id="demo"
+      className="py-24 bg-gradient-to-b from-black to-gray-900"
+    >
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -48,12 +59,9 @@ export function Gallery() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-white mb-4">
-            Endless Color Possibilities
-          </h2>
+          <h2 className="text-white mb-4">{title}</h2>
           <p className="text-xl text-white/60 max-w-2xl mx-auto">
-            Create the perfect ambiance for any occasion with 16 million color
-            combinations
+            {description}
           </p>
         </motion.div>
 
