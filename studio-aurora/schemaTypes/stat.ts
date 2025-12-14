@@ -1,23 +1,20 @@
 import {defineField, defineType} from 'sanity'
 
-export const imageBlockType = defineType({
-  name: 'imageBlock',
-  title: 'Image Block',
+export const statType = defineType({
+  name: 'stat',
+  title: 'Stat',
   type: 'object',
   fields: [
     defineField({
-      name: 'Title',
+      name: 'title',
+      title: 'Title',
       type: 'string',
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'description',
-      type: 'text',
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: 'image',
-      type: 'image',
+      title: 'Description',
+      type: 'string',
       validation: (rule) => rule.required(),
     }),
   ],

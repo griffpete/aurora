@@ -1,9 +1,10 @@
 "use client";
 
+import { useMemo } from "react";
 import { motion } from "framer-motion";
 import { ChevronRight, Sparkles } from "lucide-react";
 
-interface HeroClientProps {
+interface TopFoldProps {
   title: string;
   coloredTitle: string;
   subTitle: string;
@@ -11,9 +12,10 @@ interface HeroClientProps {
   ctaText: string;
   secondCtaText: string;
   heroImageUrl: string;
+  stats: Array<{ title: string; description: string }>;
 }
 
-export function HeroClient({
+export function TopFold({
   title,
   coloredTitle,
   subTitle,
@@ -21,7 +23,19 @@ export function HeroClient({
   ctaText,
   secondCtaText,
   heroImageUrl,
-}: HeroClientProps) {
+  stats,
+}: TopFoldProps) {
+  const particles = useMemo(
+    () =>
+      Array.from({ length: 20 }).map(() => ({
+        left: Math.random() * 100,
+        top: Math.random() * 100,
+        duration: 3 + Math.random() * 2,
+        delay: Math.random() * 2,
+      })),
+    [],
+  );
+
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
@@ -36,22 +50,22 @@ export function HeroClient({
 
       {/* Animated particles */}
       <div className="absolute inset-0 z-10">
-        {Array.from({ length: 20 }).map((_, i) => (
+        {particles.map((particle, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-white rounded-full"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
+              left: `${particle.left}%`,
+              top: `${particle.top}%`,
             }}
             animate={{
               opacity: [0, 1, 0],
               scale: [0, 1, 0],
             }}
             transition={{
-              duration: 3 + Math.random() * 2,
+              duration: particle.duration,
               repeat: Infinity,
-              delay: Math.random() * 2,
+              delay: particle.delay,
             }}
           />
         ))}
@@ -124,16 +138,12 @@ export function HeroClient({
           transition={{ duration: 0.8, delay: 1 }}
           className="mt-20 grid grid-cols-3 gap-8 max-w-3xl mx-auto"
         >
-          {[
-            { value: "50K+", label: "Homes Illuminated" },
-            { value: "16M+", label: "Color Options" },
-            { value: "Lifetime", label: "Warranty" },
-          ].map((stat, i) => (
+          {stats.map((stat, i) => (
             <div key={i} className="text-center">
               <div className="text-3xl font-bold text-white mb-2">
-                {stat.value}
+                {stat.title}
               </div>
-              <div className="text-white/60">{stat.label}</div>
+              <div className="text-white/60">{stat.description}</div>
             </div>
           ))}
         </motion.div>
