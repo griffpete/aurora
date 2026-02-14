@@ -33,7 +33,7 @@ export function Features({
   if (!cards || cards.length === 0) return null;
 
   return (
-    <section id="features" className="py-24 bg-black relative overflow-hidden">
+    <section id="features" className="py-12 md:py-24 bg-black relative overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-purple-900/20 to-black" />
 
@@ -42,20 +42,15 @@ export function Features({
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-8 md:mb-16"
         >
           <h2 className="text-white mb-4">{title}</h2>
-          <p className="text-xl text-white/60 max-w-2xl mx-auto">
+          <p className="text-base md:text-xl text-white/60 max-w-2xl mx-auto">
             {description}
           </p>
         </motion.div>
 
-        <div
-          className="grid gap-8"
-          style={{
-            gridTemplateColumns: `repeat(auto-fit, minmax(250px, 1fr))`,
-          }}
-        >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
           {cards.map((feature, index) => {
             const Icon =
               iconMap[toPascalCase(feature.lucideIconName)] ||
@@ -68,7 +63,7 @@ export function Features({
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -10 }}
-                className="bg-gradient-to-b from-white/5 to-white/0 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:border-purple-500/50 transition-colors"
+                className="bg-gradient-to-b from-white/5 to-white/0 backdrop-blur-sm border border-white/10 rounded-2xl p-5 md:p-8 hover:border-purple-500/50 transition-colors"
               >
                 <motion.div
                   whileHover={{ rotate: 360 }}

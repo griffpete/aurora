@@ -50,30 +50,30 @@ export function Demo({
   return (
     <section
       id="demo"
-      className="py-24 bg-gradient-to-b from-black to-gray-900"
+      className="py-12 md:py-24 bg-gradient-to-b from-black to-gray-900"
     >
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-8 md:mb-16"
         >
           <h2 className="text-white mb-4">{title}</h2>
-          <p className="text-xl text-white/60 max-w-2xl mx-auto">
+          <p className="text-base md:text-xl text-white/60 max-w-2xl mx-auto">
             {description}
           </p>
         </motion.div>
 
         {/* Theme selector */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
+        <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-8 md:mb-12">
           {colorThemes.map((theme, index) => (
             <motion.button
               key={index}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setSelectedTheme(index)}
-              className={`px-6 py-3 rounded-full border-2 transition-all ${
+              className={`px-4 py-2 md:px-6 md:py-3 text-sm md:text-base rounded-full border-2 transition-all ${
                 selectedTheme === index
                   ? "border-white bg-white/10 text-white"
                   : "border-white/20 text-white/60 hover:border-white/40"
@@ -145,14 +145,14 @@ export function Demo({
           </div>
 
           {/* Color chips */}
-          <div className="flex justify-center gap-4 mt-8">
+          <div className="flex justify-center gap-3 md:gap-4 mt-6 md:mt-8">
             {colorThemes[selectedTheme].colors.map((color, i) => (
               <motion.div
                 key={i}
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: i * 0.1 }}
-                className="w-16 h-16 rounded-full border-4 border-white/20 shadow-lg"
+                className="w-12 h-12 md:w-16 md:h-16 rounded-full border-4 border-white/20 shadow-lg"
                 style={{
                   backgroundColor: color,
                   boxShadow: `0 0 30px ${color}`,

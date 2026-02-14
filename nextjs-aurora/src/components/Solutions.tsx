@@ -93,7 +93,7 @@ export function Solutions({
   const solutions = defaultSolutions;
 
   return (
-    <section className="py-24 bg-gradient-to-b from-black to-gray-900 relative overflow-hidden">
+    <section className="py-12 md:py-24 bg-gradient-to-b from-black to-gray-900 relative overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-20 left-10 w-72 h-72 bg-purple-500 rounded-full blur-[120px]" />
@@ -105,15 +105,15 @@ export function Solutions({
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-8 md:mb-16"
         >
           <h2 className="text-white mb-4">{title}</h2>
-          <p className="text-xl text-white/60 max-w-3xl mx-auto">
+          <p className="text-base md:text-xl text-white/60 max-w-3xl mx-auto">
             {description}
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {solutions.map((solution, index) => {
             const Icon = solution.icon;
             return (
@@ -125,7 +125,7 @@ export function Solutions({
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
                 whileHover={{ y: -8, scale: 1.02 }}
-                className="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/10 hover:border-white/20 transition-all cursor-pointer overflow-hidden"
+                className="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-5 md:p-8 hover:bg-white/10 hover:border-white/20 transition-all cursor-pointer overflow-hidden"
               >
                 {/* Gradient background on hover */}
                 <div
@@ -183,7 +183,7 @@ export function Solutions({
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mt-16"
+          className="text-center mt-8 md:mt-16"
         >
           <p className="text-white/60 mb-6">
             Not sure which solution is right for you?
@@ -191,7 +191,7 @@ export function Solutions({
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-white/10 backdrop-blur-sm border border-white/20 text-white px-8 py-4 rounded-full hover:bg-white/20 transition-colors"
+            className="bg-white/10 backdrop-blur-sm border border-white/20 text-white px-6 py-3 md:px-8 md:py-4 rounded-full hover:bg-white/20 transition-colors"
           >
             Schedule a Consultation
           </motion.button>

@@ -41,7 +41,7 @@ export function TopFold({
   );
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <div className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 md:pt-0">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img
@@ -107,7 +107,7 @@ export function TopFold({
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="text-xl text-white/80 mb-10 max-w-2xl mx-auto"
+          className="text-base md:text-xl text-white/80 mb-6 md:mb-10 max-w-2xl mx-auto"
         >
           {description}
         </motion.p>
@@ -116,12 +116,12 @@ export function TopFold({
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="flex items-center justify-center space-x-4"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-full flex items-center space-x-2 shadow-2xl"
+            className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-3 md:px-8 md:py-4 rounded-full flex items-center space-x-2 shadow-2xl w-full sm:w-auto justify-center"
           >
             <span>{ctaText}</span>
             <ChevronRight className="w-5 h-5" />
@@ -130,7 +130,7 @@ export function TopFold({
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-white/10 backdrop-blur-sm border border-white/20 text-white px-8 py-4 rounded-full hover:bg-white/20 transition-colors"
+            className="bg-white/10 backdrop-blur-sm border border-white/20 text-white px-6 py-3 md:px-8 md:py-4 rounded-full hover:bg-white/20 transition-colors w-full sm:w-auto"
           >
             {secondCtaText}
           </motion.button>
@@ -142,14 +142,11 @@ export function TopFold({
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1 }}
-            className="mt-20 grid gap-8 max-w-3xl mx-auto"
-            style={{
-              gridTemplateColumns: `repeat(${stats.length}, minmax(0, 1fr))`,
-            }}
+            className="mt-10 md:mt-20 grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-8 max-w-3xl mx-auto"
           >
             {stats.map((stat, i) => (
               <div key={i} className="text-center">
-                <div className="text-3xl font-bold text-white mb-2">
+                <div className="text-2xl md:text-3xl font-bold text-white mb-2">
                   {stat.title}
                 </div>
                 <div className="text-white/60">{stat.description}</div>
@@ -158,22 +155,6 @@ export function TopFold({
           </motion.div>
         )}
       </div>
-
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20"
-      >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="w-6 h-10 border-2 border-white/30 rounded-full flex items-start justify-center p-2"
-        >
-          <motion.div className="w-1 h-2 bg-white rounded-full" />
-        </motion.div>
-      </motion.div>
     </div>
   );
 }

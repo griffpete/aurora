@@ -37,7 +37,7 @@ export function Contact({
 }: ContactProps) {
   const particles = useMemo(
     () =>
-      Array.from({ length: 50 }).map(() => ({
+      Array.from({ length: 20 }).map(() => ({
         left: Math.random() * 100,
         top: Math.random() * 100,
         duration: 3 + Math.random() * 2,
@@ -47,7 +47,7 @@ export function Contact({
   );
 
   return (
-    <section className="py-24 bg-gradient-to-b from-gray-900 to-black relative overflow-hidden">
+    <section className="py-12 md:py-24 bg-gradient-to-b from-gray-900 to-black relative overflow-hidden">
       {/* Animated background */}
       <div className="absolute inset-0" suppressHydrationWarning>
         {particles.map((particle, i) => (
@@ -77,22 +77,17 @@ export function Contact({
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-8 md:mb-12"
         >
-          <h2 className="text-white mb-6">{title}</h2>
-          <p className="text-xl text-white/60 max-w-2xl mx-auto">
+          <h2 className="text-white mb-4 md:mb-6">{title}</h2>
+          <p className="text-base md:text-xl text-white/60 max-w-2xl mx-auto">
             {description}
           </p>
         </motion.div>
 
         {/* Contact cards */}
         {cards && cards.length > 0 && (
-          <div
-            className="grid gap-6 mb-12"
-            style={{
-              gridTemplateColumns: `repeat(auto-fit, minmax(200px, 1fr))`,
-            }}
-          >
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-8 md:mb-12">
             {cards.map((contact, index) => {
               const Icon =
                 iconMap[toPascalCase(contact.lucideIconName)] ||
@@ -128,10 +123,10 @@ export function Contact({
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 text-white px-12 py-5 rounded-full shadow-2xl inline-flex items-center space-x-3"
+            className="bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 text-white px-8 py-4 md:px-12 md:py-5 rounded-full shadow-2xl inline-flex items-center space-x-2 md:space-x-3"
           >
             <Icons.Phone className="w-5 h-5" />
-            <span className="text-lg">{ctaText}</span>
+            <span className="text-base md:text-lg">{ctaText}</span>
           </motion.button>
 
           <p className="text-white/40 mt-6">{pullBack}</p>
