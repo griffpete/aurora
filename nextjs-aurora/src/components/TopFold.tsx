@@ -41,7 +41,7 @@ export function TopFold({
   );
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 md:pt-0">
+    <div className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 md:pt-0 pb-16 md:pb-24">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img

@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Sparkles,
   Shield,
@@ -91,6 +92,18 @@ export function Solutions({
   description = "From festive holidays to everyday elegance, discover the perfect lighting solution for every occasion and space",
 }: SolutionsProps) {
   const solutions = defaultSolutions;
+  const [showAll, setShowAll] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    setIsMobile(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
+  const visibleSolutions = isMobile && !showAll ? solutions.slice(0, 3) : solutions;
 
   return (
     <section className="py-12 md:py-24 bg-gradient-to-b from-black to-gray-900 relative overflow-hidden">
@@ -114,7 +127,8 @@ export function Solutions({
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-          {solutions.map((solution, index) => {
+          <AnimatePresence>
+          {visibleSolutions.map((solution, index) => {
             const Icon = solution.icon;
             return (
               <motion.a
@@ -176,7 +190,20 @@ export function Solutions({
               </motion.a>
             );
           })}
+          </AnimatePresence>
         </div>
+
+        {/* Show More / Show Less — mobile only */}
+        {isMobile && (
+          <div className="text-center mt-6">
+            <button
+              onClick={() => setShowAll(!showAll)}
+              className="bg-white/10 backdrop-blur-sm border border-white/20 text-white px-6 py-3 rounded-full hover:bg-white/20 transition-colors"
+            >
+              {showAll ? "Show Less" : "Show More"}
+            </button>
+          </div>
+        )}
 
         {/* Bottom CTA */}
         <motion.div
